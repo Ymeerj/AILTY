@@ -1,2 +1,2 @@
 # AILTY
-Just a stupid website based on luck ranking from a japanese lucky calendar or something like that idk, made by an average computer science student.
+Just a stupid website based on luck ranking from a japanese lucky calendar or something like that idk.
