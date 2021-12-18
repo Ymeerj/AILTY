@@ -7,11 +7,32 @@
     <link rel="stylesheet" href="style.css">
     <meta name="application-name" content="Am I lucky this year?">
     <meta charset="UTF-8">
-    <meta name="keywords" content="Luck,Year,japanese">4
+    <meta name="keywords" content="Luck,Year,japanese">
     <meta name="author" content="Ymeerj">
 </head>
 
 <body>
+    <script src="./ranks.js"></script>
+    <script>
+        function getRank() {
+            let month = document.getElementById('month').value;
+            let day = document.getElementById('day').value;
+            for (let i = 0; i < ranks.length; i++) {
+                if (ranks[i].month == month && ranks[i].day == day) {
+                    console.log(ranks[i].rank);
+                    return ranks[i].rank;
+                }
+            }
+        }
+    </script>
+    <form>
+        Month:
+        <input type="text" id="month" required><br>
+        Day:
+        <input type="text" id="day" required>
+    </form>
+    <button onclick="getRank()">Valider</button>
+
 </body>
 
 </html>
