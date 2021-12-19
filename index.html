@@ -5,34 +5,89 @@
         Am I lucky this year?
     </title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <meta name="application-name" content="Am I lucky this year?">
     <meta charset="UTF-8">
     <meta name="keywords" content="Luck,Year,japanese">
     <meta name="author" content="Ymeerj">
 </head>
 
-<body>
-    <script src="./ranks.js"></script>
-    <script>
-        function getRank() {
-            let month = document.getElementById('month').value;
-            let day = document.getElementById('day').value;
-            for (let i = 0; i < ranks.length; i++) {
-                if (ranks[i].month == month && ranks[i].day == day) {
-                    console.log(ranks[i].rank);
-                    return ranks[i].rank;
-                }
+<script src="./ranks.js"></script>
+<script>
+
+    function getRank() {
+        let bd = document.getElementById('birthday');
+        let month = parseInt(bd.value.slice(5, 7));
+        let day = parseInt(bd.value.slice(8, 10));
+        for (let i = 0; i < ranks.length; i++) {
+            if (ranks[i].month == month && ranks[i].day == day) {
+                return ranks[i].rank;
             }
         }
-    </script>
-    <form>
-        Month:
-        <input type="text" id="month" required><br>
-        Day:
-        <input type="text" id="day" required>
-    </form>
-    <button onclick="getRank()">Valider</button>
+    }
 
+    function showResult() {
+        let bd = document.getElementById('birthday');
+        console.log(bd.value == '');
+        if (bd.value != '') {
+            let i = 0;
+            const inter = setInterval(() => {
+                if (i != 30) {
+                    document.getElementById("result").innerHTML = Math.floor(Math.random() * 365) + 1;
+                    i++;
+                } else {
+                    document.getElementById("result").innerHTML = getRank();
+                    clearInterval(inter);
+                }
+            }, 25);
+        } else {
+            let i = 0;
+            const interColor = setInterval(() => {
+                if (i != 5) {
+                    if (i % 2 == 0) bd.style.borderColor = 'grey'
+                    else bd.style.borderColor = 'red';
+                    i++;
+                } else {
+                    clearInterval(interColor);
+                }
+            }, 100);
+        }
+
+    }
+
+    function nextInput() {
+        let value = document.getElementById("month").value;
+        if (value.length == 2 && document.activeElement.id == "month") {
+            document.getElementById("day").focus();
+        }
+    }
+
+
+</script>
+
+
+<body>
+    <header>
+        <h1 id="logo">Am I lucky this year?</h1>
+    </header>
+    <section id="main">
+        <div id="datePicker">
+            <span>Birthday :</span>
+            <div>
+                <!-- <input type="text" id="month" maxlength="2" onkeyup="nextInput()"><span
+                    id="dateSeparator">/</span><input type="text" id="day" maxlength="2"> -->
+                <input type="date" id="birthday">
+            </div>
+        </div>
+        <button onclick="showResult()">Let's see</button>
+        <div id="rank">Rank : <span id="result"></span></div>
+    </section>
 </body>
+
+<script>
+    document.getElementById("month")
+</script>
 
 </html>
